@@ -115,7 +115,7 @@ RMSE_R2_table
 
 # Classification————Yaojie Zhang
 # Load data
-data <- read.csv("Cambodia_data.csv")
+data <- read.csv("I.R.Iran_data.csv")
 
 # View the first few rows of the data
 head(data)
@@ -130,7 +130,14 @@ sum(is.na(data)) # Return the total number of missing values in the dataset
 colSums(is.na(data))
 
 # Convert `Event` to a factor
-data$Event <- factor(data$Event, levels = c("DROUGHT", "FLOOD", "STORM", "LIGHTNING", "FIRE", "RIVER BANK COLLAPSE", "PEST OUTBREAK", "EPIDEMIC"))
+data$Event <- factor(data$Event, levels = c("ACCIDENT", "AVALANCHE", "DROUGHT",
+                                            "DROWN", "EARTHQUAKE", 
+                                            "EPIDEMIC", "EXPLOSION","FIRE",
+                                            "FLASH FLOOD","FLOOD","FOREST FIRE",
+                                            "FROST", "GONU CYCLONE","HAILSTORM",
+                                            "LANDSLIDE","LEAK","LIQUEFACTION","OTHER",
+                                            "PLAGUE","RAINS","SNOWSTORM","STORM",
+                                            "STRONG WIND","STRUCTURE","THUNDER STORM"))
 
 # View factor levels
 levels(data$Event)
@@ -210,6 +217,8 @@ print(paste("XGBoost accuracy: ", round(xg_accuracy * 100, 2), "%", sep = ""))
 xg_importance <- xgb.importance(model = xg_model)
 print(xg_importance)
 xgb.plot.importance(xg_importance)
+
+# table(trainset$Event)
 
 # Build Random Forest model
 set.seed(123)

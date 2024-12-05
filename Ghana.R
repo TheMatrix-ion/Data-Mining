@@ -71,7 +71,8 @@ df_regression <- data.frame(PC1 = df_pca[, 1],
 
 set.seed(10) 
 training.samples <-df_regression$Deaths 
-training.samples <- createDataPartition(1:length(df_regression$Deaths), p = 0.8, list = FALSE, group=1) 
+training.samples <- createDataPartition(1:length(df_regression$Deaths), p = 0.8,
+                                        list = FALSE, group=1) 
 train_data <- df_regression[training.samples,] 
 test_data <- df_regression[-training.samples,]
 
@@ -102,16 +103,18 @@ RMSE4 = RMSE(pred1test, test_data$Deaths)
 R2_4 = R2(pred2test, test_data$Deaths)
 
 # show tables
-table <- matrix(c(RMSE1,RMSE2,R2_1,R2_2,RMSE3,RMSE4,R2_3,R2_4),ncol=4,byrow=TRUE) 
+table <- matrix(c(RMSE1, RMSE2, R2_1, R2_2, RMSE3, RMSE4, R2_3, R2_4), ncol=4, 
+                byrow=TRUE) 
 colnames(table) <- c("RMSE Train"," RMSE Test","R2 Train","R2 Test") 
 rownames(table) <- c("Model 1","Model 2") 
 RMSE_R2_table <- as.table(table) 
 RMSE_R2_table
 # Regression————Biyuan Luo
 
+
 # Classification————Yaojie Zhang
 # Load data
-data <- read.csv("Cambodia_data.csv")
+data <- read.csv("Ghana_data.csv")
 
 # View the first few rows of the data
 head(data)
@@ -126,7 +129,10 @@ sum(is.na(data)) # Return the total number of missing values in the dataset
 colSums(is.na(data))
 
 # Convert `Event` to a factor
-data$Event <- factor(data$Event, levels = c("DROUGHT", "FLOOD", "STORM", "LIGHTNING", "FIRE", "RIVER BANK COLLAPSE", "PEST OUTBREAK", "EPIDEMIC"))
+data$Event <- factor(data$Event, levels = c("BUILDING COLLAPSE", "BUSH FIRE", "COMMERCIAL FIRE", "DISEASE EPIDEMICS", "DOMESTIC FIRE", 
+                                            "EXPLOSION", "FLASH FLOOD", "FLOOD","INDUSTRIAL FIRE", "INSTITUTIONAL FIRE","LAKE/RIVER ACCIDENT",
+                                            "LANDSLIDE", "MARINE ACCIDENT", "OTHER", "PEST AND INSECT INFESTATION", "RAINSTORM",
+                                            "ROAD TRAFFIC ACCIDENT", "STORM", "THUNDERSTORM", "TIDAL WAVES", "WINDSTORM","DROUGHT"))
 
 # View factor levels
 levels(data$Event)
@@ -170,6 +176,9 @@ test_label <- as.numeric(testset$Event) - 1
 # Ensure feature names are consistent between training and test sets
 train_matrix <- train_matrix[, colnames(train_matrix) %in% colnames(test_matrix)]
 test_matrix <- test_matrix[, colnames(test_matrix) %in% colnames(train_matrix)]
+
+dim(train_matrix)
+length(train_label)
 
 # Create DMatrix objects
 xg_train <- xgb.DMatrix(data = train_matrix, label = train_label)
@@ -245,7 +254,7 @@ accuracy_plot <- ggplot(accuracy_comparison, aes(x = Model, y = Accuracy, fill =
   scale_fill_manual(values = c("blue", "blue")) +
   labs(title = "Cambodia: The difference in accuracy between Random Forest and XGBoost", x = "Model", y = "Accuracy (%)") +
   theme_minimal()
-ggsave("accuracy_comparison_plot.png", plot = accuracy_plot, width = 8, height = 6)
+ggsave("accuracy_comparison_plot_Ghana.png", plot = accuracy_plot, width = 8, height = 6)
 # Classification————Yaojie Zhang
 
 

@@ -101,7 +101,7 @@ RMSE_R2_table
 
 # Classification————Yaojie Zhang
 # Load data
-data <- read.csv("Cambodia_data.csv")
+data <- read.csv("Nepal_data.csv")
 
 # View the first few rows of the data
 head(data)
@@ -116,7 +116,15 @@ sum(is.na(data)) # Return the total number of missing values in the dataset
 colSums(is.na(data))
 
 # Convert `Event` to a factor
-data$Event <- factor(data$Event, levels = c("DROUGHT", "FLOOD", "STORM", "LIGHTNING", "FIRE", "RIVER BANK COLLAPSE", "PEST OUTBREAK", "EPIDEMIC"))
+data$Event <- factor(data$Event, levels = c("ACCIDENT", "AVALANCHE", "BIOLOGICAL", 
+                                            "BOAT CAPSIZE", "COLD WAVE", "DROUGHT", 
+                                            "EARTHQUAKE", "EPIDEMIC","EXPLOSION",
+                                            "FAMINE","FIRE","FLOOD","FOREST FIRE",
+                                            "FROST","HAIL STORM","HEAT WAVE",
+                                            "LANDSLIDE","LEAK","OTHER","PANIC",
+                                            "PLAGUE","POLLUTION","RAINS","STORM",
+                                            "SEDIMENTATION","SNOW STORM","STRONG WIND",
+                                            "STRUCT.COLLAPSE","THUNDERSTORM"))
 
 # View factor levels
 levels(data$Event)

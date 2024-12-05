@@ -114,7 +114,7 @@ RMSE_R2_table
 
 # Classification————Yaojie Zhang
 # Load data
-data <- read.csv("Cambodia_data.csv")
+data <- read.csv("Niger_data.csv")
 
 # View the first few rows of the data
 head(data)
@@ -129,7 +129,10 @@ sum(is.na(data)) # Return the total number of missing values in the dataset
 colSums(is.na(data))
 
 # Convert `Event` to a factor
-data$Event <- factor(data$Event, levels = c("DROUGHT", "FLOOD", "STORM", "LIGHTNING", "FIRE", "RIVER BANK COLLAPSE", "PEST OUTBREAK", "EPIDEMIC"))
+data$Event <- factor(data$Event, levels = c("ACCIDENT", "DROUGHT", "EPIDEMIC", 
+                                            "EPIZOOTY", "FIRE", "FLOOD", "FOREST FIRE", 
+                                            "PLAGUE", "RAVAGERS AND LOCUSTS PILGRIMS", 
+                                            "SOCIAL CONFLICTS"))
 
 # View factor levels
 levels(data$Event)
@@ -246,9 +249,9 @@ print(accuracy_comparison)
 accuracy_plot <- ggplot(accuracy_comparison, aes(x = Model, y = Accuracy, fill = Model)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = c("blue", "blue")) +
-  labs(title = "Cambodia: The difference in accuracy between Random Forest and XGBoost", x = "Model", y = "Accuracy (%)") +
+  labs(title = "Niger: The difference in accuracy between Random Forest and XGBoost", x = "Model", y = "Accuracy (%)") +
   theme_minimal()
-ggsave("accuracy_comparison_plot.png", plot = accuracy_plot, width = 8, height = 6)
+ggsave("accuracy_comparison_plot_Niger.png", plot = accuracy_plot, width = 8, height = 6)
 # Classification————Yaojie Zhang
 
 
